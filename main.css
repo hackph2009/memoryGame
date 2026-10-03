@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Tahoma, sans-serif;
+  background-color: #333;
+}
+.info-container {
+  width: 70%;
+  margin: 20px auto 0;
+  background-color: #777;
+  color: white;
+  padding: 20px;
+  font-size: 24px;
+  border: 2px solid #2196f3;
+  display: flex;
+  justify-content: space-between;
+  & .name {
+    width: 50%;
+  }
+  & .tries {
+    width: 50%;
+    text-align: right;
+  }
+}
+.blocks-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, minmax(111px, 1fr));
+  gap: 15px;
+  width: 50%;
+  margin: 20px auto 0;
+  &.no-clicking {
+    pointer-events: none;
+  }
+  & .game-block {
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      0 15px 20px 0 rgba(0, 0, 0, 0.2),
+      0 17px 30px 0 rgba(0, 0, 0, 0.19);
+    & .front {
+      background-color: #333;
+      &::before {
+        content: "!";
+        color: yellow;
+        font-size: 560%;
+        font-weight: bold;
+      }
+    }
+    & .back {
+      transform: rotateY(180deg);
+    }
+    & .face {
+      overflow: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      border: 5px solid #2196f3;
+      border-radius: 10px;
+      backface-visibility: hidden;
+    }
+    &.is-flipped,
+    &.has-matched {
+      transform: rotateY(180deg);
+      pointer-events: none;
+    }
+  }
+}
